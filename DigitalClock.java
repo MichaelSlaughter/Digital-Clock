@@ -30,7 +30,7 @@ public class DigitalClock { //digital clock class
         ZoneId newYork = ZoneId.of("America/New_York"); // zone id New York, USA
         ZoneId losAngeles = ZoneId.of("America/Los_Angeles"); // zone id Los Angeles, USA
         DateTimeFormatter formatter12hr = DateTimeFormatter.ofPattern("MM-dd-yyyy hh:mma"); //12 hour time format (mma includes AM and PM)
-        DateTimeFormatter formatter24hr = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mma"); //24 hour time format (mma includes AM and PM)
+        DateTimeFormatter formatter24hr = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm"); //24 hour time format (just mm because AM and PM isn't needed on a 24 hour clock
         boolean running = true; //boolean for whether the clock is running or not
         while (running) { //while loop with the boolean running
             System.out.println("\nSelect a time format: 12hr/24hr"); //asks the user to select a format
