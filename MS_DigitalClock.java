@@ -14,20 +14,22 @@
     * 
 */
 
-import java.time.*; 
-import java.time.format.DateTimeFormatter;
-import java.util.*;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+import java.time.*; //for time 
+import java.time.format.DateTimeFormatter; //for the date time format
+import java.util.*; //regular java util
+import java.util.concurrent.Executors; //for the executors
+import java.util.concurrent.ScheduledExecutorService; //for the scheduler
+import java.util.concurrent.TimeUnit; //defines time units like seconds or minutes
 
-public class DigitalClock { //digital clock class
+public class MS_DigitalClock { //digital clock class
     public static void main(String[] args) throws InterruptedException { //main
         Scanner sc = new Scanner(System.in); // input scanner
         ZoneId sydney = ZoneId.of("Australia/Sydney"); // zone id for Sydney, Austrailia
         ZoneId tokyo = ZoneId.of("Asia/Tokyo"); // zone id Asia, Tokyo
-        ZoneId paris = ZoneId.of("Europe/Paris"); // zone id Paris, France
+        ZoneId paris = ZoneId.of("Europe/Paris"); // zone id Paris, Europe
         ZoneId newYork = ZoneId.of("America/New_York"); // zone id New York, USA
+        ZoneId chicago = ZoneId.of("America/Chicago"); // zone id Chicago USA
+        ZoneId denver = ZoneId.of("America/Denver"); // zone id Denver USA
         ZoneId losAngeles = ZoneId.of("America/Los_Angeles"); // zone id Los Angeles, USA
         DateTimeFormatter formatter12hr = DateTimeFormatter.ofPattern("MM-dd-yyyy hh:mma"); //12 hour time format (mma includes AM and PM)
         DateTimeFormatter formatter24hr = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm"); //24 hour time format (just mm because AM and PM isn't needed on a 24 hour clock
@@ -40,18 +42,24 @@ public class DigitalClock { //digital clock class
                 ZonedDateTime dateTimeTYO = ZonedDateTime.now(tokyo); //gets the date and time of Tokyo's Zone
                 ZonedDateTime dateTimePAR = ZonedDateTime.now(paris); //gets the date and time of Paris' Zone
                 ZonedDateTime dateTimeNY = ZonedDateTime.now(newYork); //gets the date and time of New York's Zone
+                ZonedDateTime dateTimeCHI = ZonedDateTime.now(chicago); //gets the date and time of Chicago's Zone
+                ZonedDateTime dateTimeDEN = ZonedDateTime.now(denver); //gets the date and time of Denver's Zone
                 ZonedDateTime dateTimeLA = ZonedDateTime.now(losAngeles); //gets the date and time of Los Angeles' Zone
                 String ftSDY = dateTimeSDY.format(formatter12hr); // puts the dates and times in a 12 hour format for SDY
                 String ftTYO = dateTimeTYO.format(formatter12hr); // puts the dates and times in a 12 hour format for Tokyo
                 String ftPAR = dateTimePAR.format(formatter12hr); // puts the dates and times in a 12 hour format for Paris
                 String ftNY = dateTimeNY.format(formatter12hr); // puts the dates and times in a 12 hour format for New York
+                String ftCHI = dateTimeCHI.format(formatter12hr); // puts the dates and times in a 12 hour format for Chicago
+                String ftDEN = dateTimeDEN.format(formatter12hr); // puts the dates and times in a 12 hour format for Denver
                 String ftLA = dateTimeLA.format(formatter12hr); // puts the dates and times in a 12 hour format for Los Angeles
                 System.out.println(""); //new line for styling purposes
                 System.out.println("1. Sydney, Australia: " + ftSDY); //prints the menu of time options //Sydney
                 System.out.println("2. Tokyo, Asia: " + ftTYO);  //2. Tokyo
-                System.out.println("3. Paris, France: " + ftPAR); //3. Paris
+                System.out.println("3. Paris, Europe: " + ftPAR); //3. Paris
                 System.out.println("4. New York, USA: " + ftNY); //4. New York
-                System.out.println("5. Los Angeles, USA: " + ftLA); //5. Los Angeles
+                System.out.println("5. Chicago, USA: " + ftCHI); // 5. Chicago
+                System.out.println("6. Denver, USA: " + ftDEN); // 6. Denver
+                System.out.println("7. Los Angeles, USA: " + ftLA); //7. Los Angeles
                 System.out.println("Which time zone would you like to display?"); //Asks the user want time zone to display
                 String choice = sc.nextLine(); //choice input line 
                 if (choice.equals("1")) { //if choice equals 1
@@ -63,6 +71,10 @@ public class DigitalClock { //digital clock class
                 } else if (choice.equals("4")) { //if choice equals 4
                     startClock(newYork, formatter12hr, sc); //calls startClock method with New York as its zone
                 } else if (choice.equals("5")) { //if choice equals 5
+                    startClock(chicago, formatter12hr, sc); //calls startClock method with Chicago as its zone
+                } else if (choice.equals("6")) { //if choice equals 6
+                    startClock(denver, formatter12hr, sc); //calls startClock method with Denver as its zone
+                } else if (choice.equals("7")) { //if choice equals 7
                     startClock(losAngeles, formatter12hr, sc); //calls startClock method with Los Angeles as its zone
                 } else { //if choice is not one of the options in the menu 
                     System.out.println("Try again. An invalid time zone was selected."); //tells the user their choice was invalid
@@ -73,18 +85,24 @@ public class DigitalClock { //digital clock class
                 ZonedDateTime dateTimeTYO = ZonedDateTime.now(tokyo); //gets the date and time of Tokyo's Zone
                 ZonedDateTime dateTimePAR = ZonedDateTime.now(paris); //gets the date and time of Paris' Zone
                 ZonedDateTime dateTimeNY = ZonedDateTime.now(newYork); //gets the date and time of New York's Zone
+                ZonedDateTime dateTimeCHI = ZonedDateTime.now(chicago); //gets the date and time of Chicago's Zone
+                ZonedDateTime dateTimeDEN = ZonedDateTime.now(denver); //gets the date and time of Denver's Zone
                 ZonedDateTime dateTimeLA = ZonedDateTime.now(losAngeles); //gets the date and time of Los Angeles' Zone
                 String ftSDY = dateTimeSDY.format(formatter24hr); // puts the dates and times in a 24 hour format for SDY
                 String ftTYO = dateTimeTYO.format(formatter24hr); // puts the dates and times in a 24 hour format for Tokyo
                 String ftPAR = dateTimePAR.format(formatter24hr); // puts the dates and times in a 24 hour format for Paris
                 String ftNY = dateTimeNY.format(formatter24hr); // puts the dates and times in a 24 hour format for New York
+                String ftCHI = dateTimeCHI.format(formatter24hr); // puts the dates and times in a 24 hour format for Chicago
+                String ftDEN = dateTimeDEN.format(formatter24hr); // puts the dates and times in a 24 hour format for Denver
                 String ftLA = dateTimeLA.format(formatter24hr); // puts the dates and times in a 24 hour format for Los Angeles
                 System.out.println(""); //new line for styling purposes
                 System.out.println("1. Sydney, Australia: " + ftSDY); //prints the menu of time options //Sydney
                 System.out.println("2. Tokyo, Asia: " + ftTYO);  //2. Tokyo
-                System.out.println("3. Paris, France: " + ftPAR); //3. Paris
+                System.out.println("3. Paris, Europe: " + ftPAR); //3. Paris
                 System.out.println("4. New York, USA: " + ftNY); //4. New York
-                System.out.println("5. Los Angeles, USA: " + ftLA); //5. Los Angeles
+                System.out.println("5. Chicago, USA: " + ftCHI); // 5. Chicago
+                System.out.println("6. Denver, USA: " + ftDEN); // 6. Denver
+                System.out.println("7. Los Angeles, USA: " + ftLA); //7. Los Angeles
                 System.out.println("Which time zone would you like to display?"); //Asks the user want time zone to display
                 String choice = sc.nextLine(); //choice input line 
                 if (choice.equals("1")) { //if choice equals 1
@@ -96,6 +114,10 @@ public class DigitalClock { //digital clock class
                 } else if (choice.equals("4")) { //if choice equals 4
                     startClock(newYork, formatter24hr, sc); //calls startClock method with New York as its zone
                 } else if (choice.equals("5")) { //if choice equals 5
+                    startClock(chicago, formatter24hr, sc); //calls startClock method with Chicago as its zone
+                } else if (choice.equals("6")) { //if choice equals 6
+                    startClock(denver, formatter24hr, sc); //calls startClock method with Denver as its zone
+                } else if (choice.equals("7")) { //if choice equals 7
                     startClock(losAngeles, formatter24hr, sc); //calls startClock method with Los Angeles as its zone
                 } else { //if choice isn't an option from the menu
                     System.out.println("Try again. An invalid time zone was selected."); //tells the user their choice was invalid 
